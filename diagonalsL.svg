@@ -1,0 +1,8 @@
+<svg height="50" viewBox="0 0 50 50" width="50" xmlns="http://www.w3.org/2000/svg">
+	<pattern id='menuDiagonalsL' viewBox='0,0,10,10' width='0.5' height='0.5'>;
+		<rect class='background' x='0' y='0' width='10' height='10' fill='white'/>;
+		<path class='pattern' d='M0 0 L10 10 L5 10 L0 5 L0 0 M5 0 L10 0 L10 5 L5 0' fill='black'/>;
+	</pattern>;
+	<rect x="5" y="5" width="40" height="40" fill="url(#menuDiagonalsL)"/>
+</svg>
+	

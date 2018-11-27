@@ -1,0 +1,8 @@
+<svg height="50" viewBox="0 0 50 50" width="50" xmlns="http://www.w3.org/2000/svg">
+	<pattern id='menuStars' viewBox='0,0,10,10' width='0.5' height='0.5'>;
+		<rect class='background' x='0' y='0' width='10' height='10' fill='white'/>;
+		<path class='pattern' d='M5 2 L6.76 7.43 L2.15 4.07 L7.85 4.07 L3.24 7.43 Z' fill='black'/>;
+	</pattern>;
+	<rect x="5" y="5" width="40" height="40" fill="url(#menuStars)"/>
+</svg>
+	
