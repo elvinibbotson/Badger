@@ -32,13 +32,12 @@ else { // vertical layout
 	// place graphics above dialogs
 	badge.size=sh-300;
 	if(sw<badge.size) badge.size=sw;
-	var t=sh-badge.size;
-	report("badge size: "+badge.size+"; top: "+t);
-	id("header").style.top=t+"px";
-	t+=50;
+	// var t=badge.size;
+	report("badge size: "+badge.size);
+	id("header").style.top=badge.size+"px";
 	var dialogs = document.getElementsByClassName("dialog");
   	for (var i = 0; i < dialogs.length; i++) {
-    		dialogs[i].style.top=t+'px';
+    		dialogs[i].style.top=(badge.size+50)+'px';
 	}
 	// id('graphic').style.top='300px';
 	report("vertical layout");
