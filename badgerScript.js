@@ -11,8 +11,11 @@ var shape='square';
 var element='badge';
 var currentDialog='shapeDialog';
 
-var sw=window.innerWidth; // screen.width;
-var sh=window.innerHeight; // screen.height;
+
+var sw=screen.width;
+var sh=screen.height;
+// var sw=window.innerWidth; // screen.width;
+// var sh=window.innerHeight; // screen.height;
 
 badge.col='white';
 border.col='black';
