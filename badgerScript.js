@@ -40,7 +40,7 @@ else { // vertical layout
 	id("header").style.top=badge.size+"px";
 	var dialogs = document.getElementsByClassName("dialog");
   	for (var i = 0; i < dialogs.length; i++) {
-    		dialogs[i].style.top=(badge.size+50)+'px';
+    		dialogs[i].style.top=(badge.size+25)+'px';
 	}
 	// id('graphic').style.top='300px';
 	report("vertical layout");
