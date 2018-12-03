@@ -68,7 +68,7 @@ id('lozengeButton').addEventListener('click', function() {
 	badge.shape='lozenge';
 	var el="<rect id='badge' x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/2)+"' rx='"+(badge.size/5)+"' ry='"+(badge.size/5)+"' width='"+badge.size+"' height='"+badge.size+"' fill='"+badge.col+"'/>";
 	id('badgeSVG').innerHTML+=el;
-	el="<clipPath id='badgeClip'><rect id='badgeClipSquare' x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/2)+"' rx='"+(badge.size/5)+"' ry='"+(badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"'/></clipPath>";
+	el="<clipPath id='badgeClip'><rect id='badgeClipLozenge' x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/2)+"' rx='"+(badge.size/5)+"' ry='"+(badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"'/></clipPath>";
 	id('badgeSVG').innerHTML+=el;
 	show('colour');
 });
@@ -93,9 +93,9 @@ id('diamondButton').addEventListener('click', function() {
 
 id('shieldButton').addEventListener('click', function() {
 	badge.shape='shield';
-	var el="<path id='badge' d='M"+(mid-badge.size/2)+" "+mid+" L"+(mid-badge.size/2)+" "+(mid-badge.size/2)+" L"+(mid+badge.size/2)+" "+(mid-badge.size/2)+" L"+(mid+badge.size/2)+" "+mid+" A"+(badge.size/2)+" "+(badge.size/2)+" 0 1 1 "+(mid-badge.size/2)+" "+mid+"' fill='"+badge.col+"'/>";
+	var el="<path id='badge' d='M"+(mid-badge.size/2)+" "+mid+" L"+(mid-badge.size/2)+" "+(mid-badge.size/2)+" L"+(mid+badge.size/2)+" "+(mid-badge.size/2)+" L"+(mid+badge.size/2)+" "+mid+" A"+(badge.size/2)+" "+(badge.size/2)+" 0 1 1 "+(mid-badge.size/2)+" "+mid+"' fill='"+badge.col+"' transform='translate(0,0) scale(1)' />";
 	id('badgeSVG').innerHTML+=el;
-	el="<clipPath id='badgeClip'><path id='badgeClipDiamond' d='M"+(mid-badge.size/2)+" "+mid+" L"+(mid-badge.size/2)+" "+(mid-badge.size/2)+" L"+(mid+badge.size/2)+" "+(mid-badge.size/2)+" L"+(mid+badge.size/2)+" "+mid+" A"+(badge.size/2)+" "+(badge.size/2)+" 0 1 1 "+(mid-badge.size/2)+" "+mid+"'></clipPath>";
+	el="<clipPath id='badgeClip'><path id='badgeClipShield' d='M"+(mid-badge.size/2)+" "+mid+" L"+(mid-badge.size/2)+" "+(mid-badge.size/2)+" L"+(mid+badge.size/2)+" "+(mid-badge.size/2)+" L"+(mid+badge.size/2)+" "+mid+" A"+(badge.size/2)+" "+(badge.size/2)+" 0 1 1 "+(mid-badge.size/2)+" "+mid+"' transform='translate(0,0) scale(1)'></clipPath>";
 	id('badgeSVG').innerHTML+=el;
 	show('colour');
 });
@@ -220,7 +220,21 @@ id('outlineButton').addEventListener('click', function() {
 			id('badgeClipSquare').setAttribute('height',badge.size);
 			break;
 		case 'lozenge':
-			// LOZENGE OUTLINE CODE
+			report("lozenge outline");
+			el="<rect id='outline' x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/2)+"' rx='"+(badge.size/5)+"' ry='"+(badge.size/5)+"' width='"+badge.size+"' height='"+badge.size+"' fill='none' stroke='"+border.col+"' stroke-width='3'/>";
+			badge.size*=border.size;
+			id('badge').setAttribute('x',mid-badge.size/2);
+			id('badge').setAttribute('y',mid-badge.size/2);
+			id('badge').setAttribute('rx',badge.size/5);
+			id('badge').setAttribute('ry',badge.size/5);
+			id('badge').setAttribute('width',badge.size);
+			id('badge').setAttribute('height',badge.size);
+			id('badgeClipLozenge').setAttribute('x',mid-badge.size/2);
+			id('badgeClipLozenge').setAttribute('y',mid-badge.size/2);
+			id('badgeClipLozenge').setAttribute('rx',badge.size/5);
+			id('badgeClipLozenge').setAttribute('ry',badge.size/5);
+			id('badgeClipLozenge').setAttribute('width',badge.size);
+			id('badgeClipLozenge').setAttribute('height',badge.size);
 			break;
 		case 'circle':
 			report("circle outline");
@@ -243,7 +257,11 @@ id('outlineButton').addEventListener('click', function() {
 			id('badgeClipDiamond').setAttribute('height',0.707*badge.size);
 			break;
 		case 'shield':
-			// CODE FOR SHIELD OUTLINE
+			report("shield outline");
+			el="<path id='outline' d='M"+(mid-badge.size/2)+" "+mid+" L"+(mid-badge.size/2)+" "+(mid-badge.size/2)+" L"+(mid+badge.size/2)+" "+(mid-badge.size/2)+" L"+(mid+badge.size/2)+" "+mid+" A"+(badge.size/2)+" "+(badge.size/2)+" 0 1 1 "+(mid-badge.size/2)+" "+mid+"' fill='none' stroke='"+border.col+"' stroke-width='3' transform='scale(1)' />";
+			badge.size*=border.size;
+			id('badge').setAttribute('transform',"translate("+badge.size*0.025+","+badge.size*0.025+") scale("+border.size+")");
+			id('badgeClipShield').setAttribute('transform',"translate("+badge.size*0.025+","+badge.size*0.025+") scale("+border.size+")");
 			break;
 	}
 	id('badgeSVG').innerHTML+=el;
@@ -275,7 +293,26 @@ id('borderButton').addEventListener('click', function() {
 			id('badgeClipSquare').setAttribute('height',badge.size);
 			break;
 		case 'lozenge':
-			// LOZENGE BORDER CODE
+			report("lozenge border");
+			el="<mask id='borderMask'>";			// LOZENGE BORDER CODE
+			el+="<rect x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/2)+"' rx='"+(badge.size/5)+"' ry='"+(badge.size/5)+"' width='"+badge.size+"' height='"+badge.size+"' fill='white'/>";
+			el+="<rect x='"+(mid-border.size*badge.size/2)+"' y='"+(mid-border.size*badge.size/2)+"' rx='"+(border.size*badge.size/10)+"' ry='"+(border.size*badge.size/10)+"' width='"+(border.size*badge.size)+"' height='"+(border.size*badge.size)+"' fill='black'/>";
+			el+="</mask>";
+			el+="<rect id='border' x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/2)+"' rx='"+(badge.size/10)+"' ry='"+(badge.size/10)+"' width='"+badge.size+"' height='"+badge.size+"' mask='url(#borderMask)' fill='"+border.col+"'/>";
+			id('badgeSVG').innerHTML+=el;
+			badge.size*=border.size;
+			id('badge').setAttribute('x',mid-badge.size/2);
+			id('badge').setAttribute('y',mid-badge.size/2);
+			id('badge').setAttribute('rx',badge.size/10);
+			id('badge').setAttribute('ry',badge.size/10);
+			id('badge').setAttribute('width',badge.size);
+			id('badge').setAttribute('height',badge.size);
+			id('badgeClipLozenge').setAttribute('x',mid-badge.size/2);
+			id('badgeClipLozenge').setAttribute('y',mid-badge.size/2);
+			id('badgeClipLozenge').setAttribute('rx',badge.size/10);
+			id('badgeClipLozenge').setAttribute('ry',badge.size/10);
+			id('badgeClipLozenge').setAttribute('width',badge.size);
+			id('badgeClipLozenge').setAttribute('height',badge.size);
 			break;
 		case 'circle':
 			report("circle border");
@@ -308,7 +345,20 @@ id('borderButton').addEventListener('click', function() {
 			id('badgeClipDiamond').setAttribute('height',0.707*badge.size);
 			break;
 		case 'shield':
-			// CODE FOR SHIELD BORDER
+			report("shield border");
+			el="<mask id='borderMask'>";
+			var b=badge.size;
+			el+="<path d='M"+(mid-b/2)+" "+mid+" L"+(mid-b/2)+" "+(mid-b/2)+" L"+(mid+b/2)+" "+(mid-b/2)+" L"+(mid+b/2)+" "+mid+" A"+(b/2)+" "+(b/2)+" 0 1 1 "+(mid-b/2)+" "+mid+"' fill='white'/>";
+			b*=border.size;
+			el+="<path d='M"+(mid-b/2)+" "+mid+" L"+(mid-b/2)+" "+(mid-b/2)+" L"+(mid+b/2)+" "+(mid-b/2)+" L"+(mid+b/2)+" "+mid+" A"+(b/2)+" "+(b/2)+" 0 1 1 "+(mid-b/2)+" "+mid+"' fill='black'/>";
+			el+="</mask>";
+			el+="<rect id='border' x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"'  mask='url(#borderMask)' fill='"+border.col+"'/>";
+			id('badgeSVG').innerHTML+=el;
+			b=badge.size-b;
+			console.log("badge:"+badge.size+" border:"+border.size+" move by:"+b/2);
+			badge.size*=border.size;
+			id('badge').setAttribute('transform',"translate("+b/2+","+b/2+") scale("+border.size+")");
+			id('badgeClipShield').setAttribute('transform',"translate("+b/2+","+b/2+") scale("+border.size+")");
 			break;
 	}
 	element='border';
