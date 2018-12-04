@@ -211,6 +211,10 @@ h {
 	background: url(box.svg) center center no-repeat;
 }
 
+#dmndButton {
+	background: url(dmnd.svg) center center no-repeat;
+}
+
 #crossButton {
 	background: url(cross.svg) center center no-repeat;
 }

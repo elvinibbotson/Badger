@@ -84,9 +84,9 @@ id('circleButton').addEventListener('click', function() {
 
 id('diamondButton').addEventListener('click', function() {
 	badge.shape='diamond';
-	var el="<rect id='badge' x='"+(mid-0.3535*badge.size)+"' y='"+(mid-0.3535*badge.size)+"' width='"+(0.707*badge.size)+"' height='"+(0.707*badge.size)+"' transform='rotate(45,"+mid+","+mid+")' fill='"+badge.col+"'/>";
+	var el="<path id='badge' d='M"+(mid-badge.size/2)+" "+mid+" L"+mid+" "+(mid-badge.size/2)+" L"+(mid+badge.size/2)+" "+mid+" L"+mid+" "+(mid+badge.size/2)+" Z' transform='scale(1)' fill='"+badge.col+"'/>";
 	id('badgeSVG').innerHTML+=el;
-	el="<clipPath id='badgeClip'><rect id='badgeClipDiamond' x='"+(mid-0.3535*badge.size)+"' y='"+(mid-0.3535*badge.size)+"' width='"+(0.707*badge.size)+"' height='"+(0.707*badge.size)+"' transform='rotate(45,"+mid+","+mid+")'></clipPath>";
+	el="<clipPath id='badgeClip'><path id='badgeClipDiamond' d='M"+(mid-badge.size/2)+" "+mid+" L"+mid+" "+(mid-badge.size/2)+" L"+(mid+badge.size/2)+" "+mid+" L"+mid+" "+(mid+badge.size/2)+" Z' transform='scale(1)'/></clipPath>";
 	id('badgeSVG').innerHTML+=el;
 	show('colour');
 });
@@ -245,16 +245,10 @@ id('outlineButton').addEventListener('click', function() {
 			break;
 		case 'diamond':
 			report("diamond outline");
-			el="<rect id='outline' x='"+(mid-0.3535*badge.size)+"' y='"+(mid-0.3535*badge.size)+"' width='"+(0.707*badge.size)+"' height='"+(0.707*badge.size)+"' transform='rotate(45,"+mid+","+mid+")' fill='none' stroke='"+border.col+"' stroke-width='3'/>";
+			el="<path id='outline' d='M"+(mid-badge.size/2)+" "+mid+" L"+mid+" "+(mid-badge.size/2)+" L"+(mid+badge.size/2)+" "+mid+" L"+mid+" "+(mid+badge.size/2)+" Z' transform='scale(1)' fill='none' stroke='"+border.col+"' stroke-width='3'/>";
 			badge.size*=border.size;
-			id('badge').setAttribute('x',mid-0.3535*badge.size);
-			id('badge').setAttribute('y',mid-0.3535*badge.size);
-			id('badge').setAttribute('width',0.707*badge.size);
-			id('badge').setAttribute('height',0.707*badge.size);
-			id('badgeClipDiamond').setAttribute('x',mid-0.3535*badge.size);
-			id('badgeClipDiamond').setAttribute('y',mid-0.3535*badge.size);
-			id('badgeClipDiamond').setAttribute('width',0.707*badge.size);
-			id('badgeClipDiamond').setAttribute('height',0.707*badge.size);
+			id('badge').setAttribute('transform',"translate("+badge.size*0.025+","+badge.size*0.025+") scale("+border.size+")");
+			id('badgeClipDiamond').setAttribute('transform',"translate("+badge.size*0.025+","+badge.size*0.025+") scale("+border.size+")");
 			break;
 		case 'shield':
 			report("shield outline");
@@ -329,12 +323,21 @@ id('borderButton').addEventListener('click', function() {
 		case 'diamond':
 			report("diamond border");
 			el="<mask id='borderMask'>";
-			el+="<rect x='"+(mid-0.3535*badge.size)+"' y='"+(mid-0.3535*badge.size)+"' width='"+(0.707*badge.size)+"' height='"+(0.707*badge.size)+"' transform='rotate(45,"+mid+","+mid+")' fill='white'/>";
-			el+="<rect x='"+(mid-0.3535*border.size*badge.size)+"' y='"+(mid-0.3535*border.size*badge.size)+"' width='"+(0.707*border.size*badge.size)+"' height='"+(0.707*border.size*badge.size)+"' transform='rotate(45,"+mid+","+mid+")' fill='black'/>";
+			var b=badge.size;
+			el+="<path d='M"+(mid-b/2)+" "+mid+" L"+mid+" "+(mid-b/2)+" L"+(mid+b/2)+" "+mid+" L"+mid+" "+(mid+b/2)+" Z' transform='scale(1)' fill='white'/>";
+			// el+="<rect x='"+(mid-0.3535*badge.size)+"' y='"+(mid-0.3535*badge.size)+"' width='"+(0.707*badge.size)+"' height='"+(0.707*badge.size)+"' transform='rotate(45,"+mid+","+mid+")' fill='white'/>";
+			b*=border.size;
+			el+="<path d='M"+(mid-b/2)+" "+mid+" L"+mid+" "+(mid-b/2)+" L"+(mid+b/2)+" "+mid+" L"+mid+" "+(mid+b/2)+" Z' transform='scale(1)' fill='black'/>";
+			// el+="<rect x='"+(mid-0.3535*border.size*badge.size)+"' y='"+(mid-0.3535*border.size*badge.size)+"' width='"+(0.707*border.size*badge.size)+"' height='"+(0.707*border.size*badge.size)+"' transform='rotate(45,"+mid+","+mid+")' fill='black'/>";
 			el+="</mask>";
+			// el+="<rect id='border' x='"+(mid-b/2)+"' y='"+(mid-b/2)+"' width='"+b+"' height='"+b+"'  mask='url(#borderMask)' fill='"+border.col+"'/>";
 			el+="<rect id='border' x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"'  mask='url(#borderMask)' fill='"+border.col+"'/>";
 			id('badgeSVG').innerHTML+=el;
+			b=badge.size-b;
 			badge.size*=border.size;
+			id('badge').setAttribute('transform',"translate("+b/2+","+b/2+") scale("+border.size+")");
+			id('badgeClipDiamond').setAttribute('transform',"translate("+b/2+","+b/2+") scale("+border.size+")");
+			/*
 			id('badge').setAttribute('x',mid-0.3535*badge.size);
 			id('badge').setAttribute('y',mid-0.3535*badge.size);
 			id('badge').setAttribute('width',0.707*badge.size);
@@ -343,6 +346,7 @@ id('borderButton').addEventListener('click', function() {
 			id('badgeClipDiamond').setAttribute('y',mid-0.3535*badge.size);
 			id('badgeClipDiamond').setAttribute('width',0.707*badge.size);
 			id('badgeClipDiamond').setAttribute('height',0.707*badge.size);
+			*/
 			break;
 		case 'shield':
 			report("shield border");
