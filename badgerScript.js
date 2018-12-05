@@ -325,28 +325,15 @@ id('borderButton').addEventListener('click', function() {
 			el="<mask id='borderMask'>";
 			var b=badge.size;
 			el+="<path d='M"+(mid-b/2)+" "+mid+" L"+mid+" "+(mid-b/2)+" L"+(mid+b/2)+" "+mid+" L"+mid+" "+(mid+b/2)+" Z' transform='scale(1)' fill='white'/>";
-			// el+="<rect x='"+(mid-0.3535*badge.size)+"' y='"+(mid-0.3535*badge.size)+"' width='"+(0.707*badge.size)+"' height='"+(0.707*badge.size)+"' transform='rotate(45,"+mid+","+mid+")' fill='white'/>";
 			b*=border.size;
 			el+="<path d='M"+(mid-b/2)+" "+mid+" L"+mid+" "+(mid-b/2)+" L"+(mid+b/2)+" "+mid+" L"+mid+" "+(mid+b/2)+" Z' transform='scale(1)' fill='black'/>";
-			// el+="<rect x='"+(mid-0.3535*border.size*badge.size)+"' y='"+(mid-0.3535*border.size*badge.size)+"' width='"+(0.707*border.size*badge.size)+"' height='"+(0.707*border.size*badge.size)+"' transform='rotate(45,"+mid+","+mid+")' fill='black'/>";
 			el+="</mask>";
-			// el+="<rect id='border' x='"+(mid-b/2)+"' y='"+(mid-b/2)+"' width='"+b+"' height='"+b+"'  mask='url(#borderMask)' fill='"+border.col+"'/>";
 			el+="<rect id='border' x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"'  mask='url(#borderMask)' fill='"+border.col+"'/>";
 			id('badgeSVG').innerHTML+=el;
 			b=badge.size-b;
 			badge.size*=border.size;
 			id('badge').setAttribute('transform',"translate("+b/2+","+b/2+") scale("+border.size+")");
 			id('badgeClipDiamond').setAttribute('transform',"translate("+b/2+","+b/2+") scale("+border.size+")");
-			/*
-			id('badge').setAttribute('x',mid-0.3535*badge.size);
-			id('badge').setAttribute('y',mid-0.3535*badge.size);
-			id('badge').setAttribute('width',0.707*badge.size);
-			id('badge').setAttribute('height',0.707*badge.size);
-			id('badgeClipDiamond').setAttribute('x',mid-0.3535*badge.size);
-			id('badgeClipDiamond').setAttribute('y',mid-0.3535*badge.size);
-			id('badgeClipDiamond').setAttribute('width',0.707*badge.size);
-			id('badgeClipDiamond').setAttribute('height',0.707*badge.size);
-			*/
 			break;
 		case 'shield':
 			report("shield border");
@@ -615,7 +602,7 @@ id('noSymbolButton').addEventListener('click', function() {
 
 id('ballButton').addEventListener('click', function() {
 	report("ball");
-	var el="<circle id='symbol' cx='"+mid+"' cy='"+mid+"' r='"+(badge.size*0.3)+"' fill='black'/>";
+	var el="<circle id='symbol' cx='"+mid+"' cy='"+mid+"' r='"+(badge.size*0.2)+"' fill='black'/>";
 	id('badgeSVG').innerHTML+=el;
 	element="symbol";
 	show("colour");
@@ -625,8 +612,8 @@ id('ringButton').addEventListener('click', function() {
 	report("ring");
 	var el="<mask id='symbolMask'>";
 	el+="<rect x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black'/>";
-	el+="<circle cx='"+mid+"' cy='"+mid+"' r='"+(badge.size*0.3)+"' fill='white'/>";
-	el+="<circle cx='"+mid+"' cy='"+mid+"' r='"+(badge.size*0.15)+"' fill='black'/>";
+	el+="<circle cx='"+mid+"' cy='"+mid+"' r='"+(badge.size*0.2)+"' fill='white'/>";
+	el+="<circle cx='"+mid+"' cy='"+mid+"' r='"+(badge.size*0.1)+"' fill='black'/>";
 	el+="</mask>";
 	el+="<rect id='symbol' x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black' mask='url(#symbolMask)' clip-path='url(#badgeClip)'/>";
 	id('badgeSVG').innerHTML+=el;
@@ -637,6 +624,14 @@ id('ringButton').addEventListener('click', function() {
 id('boxButton').addEventListener('click', function() {
 	report("box");
 	var el="<rect id='symbol' x='"+(mid-badge.size/5)+"' y='"+(mid-badge.size/5)+"' width='"+(badge.size*0.5)+"' height='"+(badge.size*0.5)+"' fill='black'/>";
+	id('badgeSVG').innerHTML+=el;
+	element="symbol";
+	show("colour");
+});
+
+id('dmndButton').addEventListener('click', function() {
+	report("diamond");
+	var el="<path id='symbol' d='M "+(mid-badge.size/5)+" "+mid+" L"+mid+" "+(mid-badge.size/5)+" L"+(mid+badge.size/5)+" "+mid+" L"+mid+" "+(mid+badge.size/5)+" Z' fill='black'/>";
 	id('badgeSVG').innerHTML+=el;
 	element="symbol";
 	show("colour");
