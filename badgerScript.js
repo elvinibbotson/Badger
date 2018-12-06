@@ -6,7 +6,7 @@ var division={};
 var symbol={};
 var pattern=false;
 
-var mid=250;
+// var mid=250;
 var shape='square';
 var element='badge';
 var currentDialog='shapeDialog';
@@ -48,54 +48,61 @@ else { // vertical layout
 report("size graphic area to "+badge.size);
 id('graphic').style.width=badge.size+'px';
 id('graphic').style.height=badge.size+'px';
-mid=badge.size/2;
+// mid=badge.size/2;
 id('badgeSVG').style.width=badge.size+'px';
 id('badgeSVG').style.height=badge.size+'px';
+// badge.size-=20;
+// report("size: "+badge.size+"; mid: "+mid);
+// id('badgeSVG').style.top='5px';
+
+// offset graphcs origin to centre
+document.getElementById('badgeSVG').setAttribute('viewBox',(-1*badge.size/2)+' '+(-1*badge.size/2)+' '+badge.size+' '+badge.size);
+
 badge.size-=20;
-report("size: "+badge.size+"; mid: "+mid);
+report("size: "+badge.size);
 id('badgeSVG').style.top='5px';
 
 id('squareButton').addEventListener('click', function() {
 	badge.shape='square';
-	var el="<rect id='badge' x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='"+badge.col+"'/>";
+	var el="<rect id='badge' x='"+(-badge.size/2)+"' y='"+(-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='"+badge.col+"'/>";
 	id('badgeSVG').innerHTML+=el;
-	el="<clipPath id='badgeClip'><rect id='badgeClipSquare' x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"'/></clipPath>";
+	el="<clipPath id='badgeClip'><rect id='badgeClipSquare' x='"+(-badge.size/2)+"' y='"+(-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"'/></clipPath>";
 	id('badgeSVG').innerHTML+=el;
 	show('colour');
 });
 
 id('lozengeButton').addEventListener('click', function() {
 	badge.shape='lozenge';
-	var el="<rect id='badge' x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/2)+"' rx='"+(badge.size/5)+"' ry='"+(badge.size/5)+"' width='"+badge.size+"' height='"+badge.size+"' fill='"+badge.col+"'/>";
+	var el="<rect id='badge' x='"+(-badge.size/2)+"' y='"+(-badge.size/2)+"' rx='"+(badge.size/5)+"' ry='"+(badge.size/5)+"' width='"+badge.size+"' height='"+badge.size+"' fill='"+badge.col+"'/>";
 	id('badgeSVG').innerHTML+=el;
-	el="<clipPath id='badgeClip'><rect id='badgeClipLozenge' x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/2)+"' rx='"+(badge.size/5)+"' ry='"+(badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"'/></clipPath>";
+	el="<clipPath id='badgeClip'><rect id='badgeClipLozenge' x='"+(-badge.size/2)+"' y='"+(-badge.size/2)+"' rx='"+(badge.size/5)+"' ry='"+(badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"'/></clipPath>";
 	id('badgeSVG').innerHTML+=el;
 	show('colour');
 });
 
 id('circleButton').addEventListener('click', function() {
 	badge.shape='circle';
-	var el="<circle id='badge' cx='"+mid+"' cy='"+mid+"' r='"+badge.size/2+"' fill='"+badge.col+"'/>";
+	var el="<circle id='badge' cx='0' cy='0' r='"+badge.size/2+"' fill='"+badge.col+"'/>";
 	id('badgeSVG').innerHTML+=el;
-	el="<clipPath id='badgeClip'><circle id='badgeClipCircle' cx='"+mid+"' cy='"+mid+"' r='"+badge.size/2+"'/></clipPath>";
+	el="<clipPath id='badgeClip'><circle id='badgeClipCircle' cx='0' cy='0' r='"+badge.size/2+"'/></clipPath>";
 	id('badgeSVG').innerHTML+=el;
 	show('colour');
 });
 
 id('diamondButton').addEventListener('click', function() {
 	badge.shape='diamond';
-	var el="<path id='badge' d='M"+(mid-badge.size/2)+" "+mid+" L"+mid+" "+(mid-badge.size/2)+" L"+(mid+badge.size/2)+" "+mid+" L"+mid+" "+(mid+badge.size/2)+" Z' transform='scale(1)' fill='"+badge.col+"'/>";
+	var el="<path id='badge' d='M"+(-badge.size/2)+" 0 L0"+(-badge.size/2)+" L"+(badge.size/2)+" 0 L0 "+(badge.size/2)+" Z' transform='scale(1)' fill='"+badge.col+"'/>";
 	id('badgeSVG').innerHTML+=el;
-	el="<clipPath id='badgeClip'><path id='badgeClipDiamond' d='M"+(mid-badge.size/2)+" "+mid+" L"+mid+" "+(mid-badge.size/2)+" L"+(mid+badge.size/2)+" "+mid+" L"+mid+" "+(mid+badge.size/2)+" Z' transform='scale(1)'/></clipPath>";
+	el="<clipPath id='badgeClip'><path id='badgeClipDiamond' d='M"+(-badge.size/2)+" 0 L0 "+(-badge.size/2)+" L"+(badge.size/2)+" 0 L0 "+(badge.size/2)+" Z' transform='scale(1)'/></clipPath>";
 	id('badgeSVG').innerHTML+=el;
 	show('colour');
 });
 
 id('shieldButton').addEventListener('click', function() {
 	badge.shape='shield';
-	var el="<path id='badge' d='M"+(mid-badge.size/2)+" "+mid+" L"+(mid-badge.size/2)+" "+(mid-badge.size/2)+" L"+(mid+badge.size/2)+" "+(mid-badge.size/2)+" L"+(mid+badge.size/2)+" "+mid+" A"+(badge.size/2)+" "+(badge.size/2)+" 0 1 1 "+(mid-badge.size/2)+" "+mid+"' fill='"+badge.col+"' transform='translate(0,0) scale(1)' />";
+	var el="<path id='badge' d='M"+(-badge.size/2)+" 0 L"+(-badge.size/2)+" "+(-badge.size/2)+" L"+(badge.size/2)+" "+(-badge.size/2)+" L"+(badge.size/2)+" 0 A"+(badge.size/2)+" "+(badge.size/2)+" 0 1 1 "+(-badge.size/2)+" 0' fill='"+badge.col+"' transform='scale(1)' />";
 	id('badgeSVG').innerHTML+=el;
-	el="<clipPath id='badgeClip'><path id='badgeClipShield' d='M"+(mid-badge.size/2)+" "+mid+" L"+(mid-badge.size/2)+" "+(mid-badge.size/2)+" L"+(mid+badge.size/2)+" "+(mid-badge.size/2)+" L"+(mid+badge.size/2)+" "+mid+" A"+(badge.size/2)+" "+(badge.size/2)+" 0 1 1 "+(mid-badge.size/2)+" "+mid+"' transform='translate(0,0) scale(1)'></clipPath>";
+	el="<clipPath id='badgeClip'><path id='badgeClipShield' d='M"+(-badge.size/2)+" 0 L"+(-badge.size/2)+" "+(-badge.size/2)+" L"+(badge.size/2)+" "+(-badge.size/2)+" L"+(badge.size/2)+" 0 A"+(badge.size/2)+" "+(badge.size/2)+" 0 1 1 "+(-badge.size/2)+" 0' transform='scale(1)'></clipPath>";
 	id('badgeSVG').innerHTML+=el;
 	show('colour');
 });
@@ -208,29 +215,29 @@ id('outlineButton').addEventListener('click', function() {
 	switch(badge.shape) {		
 		case 'square':
 			report("square outline");
-			el="<rect id='outline' x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='none' stroke='"+border.col+"' stroke-width='3'/>";
+			el="<rect id='outline' x='"+(-badge.size/2)+"' y='"+(-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='none' stroke='"+border.col+"' stroke-width='3'/>";
 			badge.size*=border.size;
-			id('badge').setAttribute('x',mid-badge.size/2);
-			id('badge').setAttribute('y',mid-badge.size/2);
+			id('badge').setAttribute('x',-badge.size/2);
+			id('badge').setAttribute('y',-badge.size/2);
 			id('badge').setAttribute('width',badge.size);
 			id('badge').setAttribute('height',badge.size);
-			id('badgeClipSquare').setAttribute('x',mid-badge.size/2);
-			id('badgeClipSquare').setAttribute('y',mid-badge.size/2);
+			id('badgeClipSquare').setAttribute('x',-badge.size/2);
+			id('badgeClipSquare').setAttribute('y',-badge.size/2);
 			id('badgeClipSquare').setAttribute('width',badge.size);
 			id('badgeClipSquare').setAttribute('height',badge.size);
 			break;
 		case 'lozenge':
 			report("lozenge outline");
-			el="<rect id='outline' x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/2)+"' rx='"+(badge.size/5)+"' ry='"+(badge.size/5)+"' width='"+badge.size+"' height='"+badge.size+"' fill='none' stroke='"+border.col+"' stroke-width='3'/>";
+			el="<rect id='outline' x='"+(-badge.size/2)+"' y='"+(-badge.size/2)+"' rx='"+(badge.size/5)+"' ry='"+(badge.size/5)+"' width='"+badge.size+"' height='"+badge.size+"' fill='none' stroke='"+border.col+"' stroke-width='3'/>";
 			badge.size*=border.size;
-			id('badge').setAttribute('x',mid-badge.size/2);
-			id('badge').setAttribute('y',mid-badge.size/2);
+			id('badge').setAttribute('x',-badge.size/2);
+			id('badge').setAttribute('y',-badge.size/2);
 			id('badge').setAttribute('rx',badge.size/5);
 			id('badge').setAttribute('ry',badge.size/5);
 			id('badge').setAttribute('width',badge.size);
 			id('badge').setAttribute('height',badge.size);
-			id('badgeClipLozenge').setAttribute('x',mid-badge.size/2);
-			id('badgeClipLozenge').setAttribute('y',mid-badge.size/2);
+			id('badgeClipLozenge').setAttribute('x',-badge.size/2);
+			id('badgeClipLozenge').setAttribute('y',-badge.size/2);
 			id('badgeClipLozenge').setAttribute('rx',badge.size/5);
 			id('badgeClipLozenge').setAttribute('ry',badge.size/5);
 			id('badgeClipLozenge').setAttribute('width',badge.size);
@@ -238,24 +245,24 @@ id('outlineButton').addEventListener('click', function() {
 			break;
 		case 'circle':
 			report("circle outline");
-			el="<circle id='outline' cx='"+mid+"' cy='"+mid+"' r='"+badge.size/2+"' fill='none' stroke='"+border.col+"' stroke-width='5'/>";
+			el="<circle id='outline' cx='0 cy='0 r='"+badge.size/2+"' fill='none' stroke='"+border.col+"' stroke-width='5'/>";
 			badge.size*=border.size;
 			id('badge').setAttribute('r',badge.size/2);
 			id('badgeClipCircle').setAttribute('r',badge.size/2);
 			break;
 		case 'diamond':
 			report("diamond outline");
-			el="<path id='outline' d='M"+(mid-badge.size/2)+" "+mid+" L"+mid+" "+(mid-badge.size/2)+" L"+(mid+badge.size/2)+" "+mid+" L"+mid+" "+(mid+badge.size/2)+" Z' transform='scale(1)' fill='none' stroke='"+border.col+"' stroke-width='3'/>";
+			el="<path id='outline' d='M"+(-badge.size/2)+" 0 L0"+(-badge.size/2)+" L"+(badge.size/2)+" 0 L0 "+(badge.size/2)+" Z' transform='scale(1)' fill='none' stroke='"+border.col+"' stroke-width='3'/>";
 			badge.size*=border.size;
-			id('badge').setAttribute('transform',"translate("+badge.size*0.025+","+badge.size*0.025+") scale("+border.size+")");
-			id('badgeClipDiamond').setAttribute('transform',"translate("+badge.size*0.025+","+badge.size*0.025+") scale("+border.size+")");
+			id('badge').setAttribute('transform','scale('+border.size+')');
+			id('badgeClipDiamond').setAttribute('transform','scale('+border.size+')');
 			break;
 		case 'shield':
 			report("shield outline");
-			el="<path id='outline' d='M"+(mid-badge.size/2)+" "+mid+" L"+(mid-badge.size/2)+" "+(mid-badge.size/2)+" L"+(mid+badge.size/2)+" "+(mid-badge.size/2)+" L"+(mid+badge.size/2)+" "+mid+" A"+(badge.size/2)+" "+(badge.size/2)+" 0 1 1 "+(mid-badge.size/2)+" "+mid+"' fill='none' stroke='"+border.col+"' stroke-width='3' transform='scale(1)' />";
+			el="<path id='outline' d='M"+(-badge.size/2)+" 0 L"+(-badge.size/2)+" "+(-badge.size/2)+" L"+(badge.size/2)+" "+(-badge.size/2)+" L"+(badge.size/2)+" 0 A"+(badge.size/2)+" "+(badge.size/2)+" 0 1 1 "+(-badge.size/2)+" 0' fill='none' stroke='"+border.col+"' stroke-width='3' transform='scale(1)' />";
 			badge.size*=border.size;
-			id('badge').setAttribute('transform',"translate("+badge.size*0.025+","+badge.size*0.025+") scale("+border.size+")");
-			id('badgeClipShield').setAttribute('transform',"translate("+badge.size*0.025+","+badge.size*0.025+") scale("+border.size+")");
+			id('badge').setAttribute('transform','scale('+border.size+')');
+			id('badgeClipShield').setAttribute('transform', 'scale('+border.size+')');
 			break;
 	}
 	id('badgeSVG').innerHTML+=el;
@@ -271,38 +278,38 @@ id('borderButton').addEventListener('click', function() {
 		case 'square':
 			report("square border");
 			el="<mask id='borderMask'>";
-			el+="<rect x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='white'/>";
-			el+="<rect x='"+(mid-border.size*badge.size/2)+"' y='"+(mid-border.size*badge.size/2)+"' width='"+(border.size*badge.size)+"' height='"+(border.size*badge.size)+"' fill='black'/>";
+			el+="<rect x='"+(-badge.size/2)+"' y='"+(-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='white'/>";
+			el+="<rect x='"+(-border.size*badge.size/2)+"' y='"+(-border.size*badge.size/2)+"' width='"+(border.size*badge.size)+"' height='"+(border.size*badge.size)+"' fill='black'/>";
 			el+="</mask>";
-			el+="<rect id='border' x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' mask='url(#borderMask)' fill='"+border.col+"'/>";
+			el+="<rect id='border' x='"+(-badge.size/2)+"' y='"+(-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' mask='url(#borderMask)' fill='"+border.col+"'/>";
 			id('badgeSVG').innerHTML+=el;
 			badge.size*=border.size;
-			id('badge').setAttribute('x',mid-badge.size/2);
-			id('badge').setAttribute('y',mid-badge.size/2);
+			id('badge').setAttribute('x',-badge.size/2);
+			id('badge').setAttribute('y',-badge.size/2);
 			id('badge').setAttribute('width',badge.size);
 			id('badge').setAttribute('height',badge.size);
-			id('badgeClipSquare').setAttribute('x',mid-badge.size/2);
-			id('badgeClipSquare').setAttribute('y',mid-badge.size/2);
+			id('badgeClipSquare').setAttribute('x',-badge.size/2);
+			id('badgeClipSquare').setAttribute('y',-badge.size/2);
 			id('badgeClipSquare').setAttribute('width',badge.size);
 			id('badgeClipSquare').setAttribute('height',badge.size);
 			break;
 		case 'lozenge':
 			report("lozenge border");
-			el="<mask id='borderMask'>";			// LOZENGE BORDER CODE
-			el+="<rect x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/2)+"' rx='"+(badge.size/5)+"' ry='"+(badge.size/5)+"' width='"+badge.size+"' height='"+badge.size+"' fill='white'/>";
-			el+="<rect x='"+(mid-border.size*badge.size/2)+"' y='"+(mid-border.size*badge.size/2)+"' rx='"+(border.size*badge.size/10)+"' ry='"+(border.size*badge.size/10)+"' width='"+(border.size*badge.size)+"' height='"+(border.size*badge.size)+"' fill='black'/>";
+			el="<mask id='borderMask'>";
+			el+="<rect x='"+(-badge.size/2)+"' y='"+(-badge.size/2)+"' rx='"+(badge.size/5)+"' ry='"+(badge.size/5)+"' width='"+badge.size+"' height='"+badge.size+"' fill='white'/>";
+			el+="<rect x='"+(-border.size*badge.size/2)+"' y='"+(-border.size*badge.size/2)+"' rx='"+(border.size*badge.size/10)+"' ry='"+(border.size*badge.size/10)+"' width='"+(border.size*badge.size)+"' height='"+(border.size*badge.size)+"' fill='black'/>";
 			el+="</mask>";
-			el+="<rect id='border' x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/2)+"' rx='"+(badge.size/10)+"' ry='"+(badge.size/10)+"' width='"+badge.size+"' height='"+badge.size+"' mask='url(#borderMask)' fill='"+border.col+"'/>";
+			el+="<rect id='border' x='"+(-badge.size/2)+"' y='"+(-badge.size/2)+"' rx='"+(badge.size/10)+"' ry='"+(badge.size/10)+"' width='"+badge.size+"' height='"+badge.size+"' mask='url(#borderMask)' fill='"+border.col+"'/>";
 			id('badgeSVG').innerHTML+=el;
 			badge.size*=border.size;
-			id('badge').setAttribute('x',mid-badge.size/2);
-			id('badge').setAttribute('y',mid-badge.size/2);
+			id('badge').setAttribute('x',-badge.size/2);
+			id('badge').setAttribute('y',-badge.size/2);
 			id('badge').setAttribute('rx',badge.size/10);
 			id('badge').setAttribute('ry',badge.size/10);
 			id('badge').setAttribute('width',badge.size);
 			id('badge').setAttribute('height',badge.size);
-			id('badgeClipLozenge').setAttribute('x',mid-badge.size/2);
-			id('badgeClipLozenge').setAttribute('y',mid-badge.size/2);
+			id('badgeClipLozenge').setAttribute('x',-badge.size/2);
+			id('badgeClipLozenge').setAttribute('y',-badge.size/2);
 			id('badgeClipLozenge').setAttribute('rx',badge.size/10);
 			id('badgeClipLozenge').setAttribute('ry',badge.size/10);
 			id('badgeClipLozenge').setAttribute('width',badge.size);
@@ -311,10 +318,10 @@ id('borderButton').addEventListener('click', function() {
 		case 'circle':
 			report("circle border");
 			el="<mask id='borderMask'>";
-			el+="<circle cx='"+mid+"' cy='"+mid+"' r='"+badge.size/2+"' fill='white'/>";
-			el+="<circle cx='"+mid+"' cy='"+mid+"' r='"+(badge.size*border.size/2)+"' fill='black'/>";
+			el+="<circle cx='0' cy='0' r='"+badge.size/2+"' fill='white'/>";
+			el+="<circle cx='0' cy='0' r='"+(badge.size*border.size/2)+"' fill='black'/>";
 			el+="</mask>";
-			el+="<circle id='border' cx='"+mid+"' cy='"+mid+"' r='"+badge.size/2+"' mask='url(#borderMask)'/>";
+			el+="<circle id='border' cx='0' cy='0' r='"+badge.size/2+"' mask='url(#borderMask)'/>";
 			id('badgeSVG').innerHTML+=el;
 			badge.size*=border.size;
 			id('badge').setAttribute('r',badge.size/2);
@@ -324,32 +331,31 @@ id('borderButton').addEventListener('click', function() {
 			report("diamond border");
 			el="<mask id='borderMask'>";
 			var b=badge.size;
-			el+="<path d='M"+(mid-b/2)+" "+mid+" L"+mid+" "+(mid-b/2)+" L"+(mid+b/2)+" "+mid+" L"+mid+" "+(mid+b/2)+" Z' transform='scale(1)' fill='white'/>";
+			el+="<path d='M"+(-b/2)+" 0 L0 "+(-b/2)+" L"+(b/2)+" 0 L0 "+(b/2)+" Z' fill='white'/>";
 			b*=border.size;
-			el+="<path d='M"+(mid-b/2)+" "+mid+" L"+mid+" "+(mid-b/2)+" L"+(mid+b/2)+" "+mid+" L"+mid+" "+(mid+b/2)+" Z' transform='scale(1)' fill='black'/>";
+			el+="<path d='M"+(-b/2)+" 0 L0 "+(-b/2)+" L"+(b/2)+" 0 L0 "+(b/2)+" Z' fill='black'/>";
 			el+="</mask>";
-			el+="<rect id='border' x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"'  mask='url(#borderMask)' fill='"+border.col+"'/>";
+			el+="<rect id='border' x='"+(-badge.size/2)+"' y='"+(-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"'  mask='url(#borderMask)' fill='"+border.col+"'/>";
 			id('badgeSVG').innerHTML+=el;
 			b=badge.size-b;
 			badge.size*=border.size;
-			id('badge').setAttribute('transform',"translate("+b/2+","+b/2+") scale("+border.size+")");
-			id('badgeClipDiamond').setAttribute('transform',"translate("+b/2+","+b/2+") scale("+border.size+")");
+			id('badge').setAttribute('transform','scale('+border.size+')');
+			id('badgeClipDiamond').setAttribute('transform','scale('+border.size+')');
 			break;
 		case 'shield':
 			report("shield border");
 			el="<mask id='borderMask'>";
 			var b=badge.size;
-			el+="<path d='M"+(mid-b/2)+" "+mid+" L"+(mid-b/2)+" "+(mid-b/2)+" L"+(mid+b/2)+" "+(mid-b/2)+" L"+(mid+b/2)+" "+mid+" A"+(b/2)+" "+(b/2)+" 0 1 1 "+(mid-b/2)+" "+mid+"' fill='white'/>";
+			el+="<path d='M"+(-b/2)+" 0 L"+(-b/2)+" "+(-b/2)+" L"+(b/2)+" "+(-b/2)+" L"+(b/2)+" 0 A"+(b/2)+" "+(b/2)+" 0 1 1 "+(-b/2)+" 0' fill='white'/>";
 			b*=border.size;
-			el+="<path d='M"+(mid-b/2)+" "+mid+" L"+(mid-b/2)+" "+(mid-b/2)+" L"+(mid+b/2)+" "+(mid-b/2)+" L"+(mid+b/2)+" "+mid+" A"+(b/2)+" "+(b/2)+" 0 1 1 "+(mid-b/2)+" "+mid+"' fill='black'/>";
+			el+="<path d='M"+(-b/2)+" 0 L"+(-b/2)+" "+(-b/2)+" L"+(b/2)+" "+(-b/2)+" L"+(b/2)+" 0 A"+(b/2)+" "+(b/2)+" 0 1 1 "+(-b/2)+" 0' fill='black'/>";
 			el+="</mask>";
-			el+="<rect id='border' x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"'  mask='url(#borderMask)' fill='"+border.col+"'/>";
+			el+="<rect id='border' x='"+(-badge.size/2)+"' y='"+(-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"'  mask='url(#borderMask)' fill='"+border.col+"'/>";
 			id('badgeSVG').innerHTML+=el;
 			b=badge.size-b;
-			console.log("badge:"+badge.size+" border:"+border.size+" move by:"+b/2);
 			badge.size*=border.size;
-			id('badge').setAttribute('transform',"translate("+b/2+","+b/2+") scale("+border.size+")");
-			id('badgeClipShield').setAttribute('transform',"translate("+b/2+","+b/2+") scale("+border.size+")");
+			id('badge').setAttribute('transform','scale('+border.size+')');
+			id('badgeClipShield').setAttribute('transform','scale('+border.size+')');
 			break;
 	}
 	element='border';
@@ -364,10 +370,10 @@ id('noDivisionButton').addEventListener('click', function() {
 id('VdivButton').addEventListener('click', function() {
 	report("vertical division");
 	var el="<mask id='divisionMask'>";
-	el+="<rect x='"+mid+"' y='"+(mid-badge.size/2)+"' width='"+(badge.size/2)+"' height='"+badge.size+"' fill='white'/>";
-	el+="<rect x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/2)+"' width='"+(badge.size/2)+"' height='"+badge.size+"' fill='black'/>";
+	el+="<rect x='0' y='"+(-badge.size/2)+"' width='"+(badge.size/2)+"' height='"+badge.size+"' fill='white'/>";
+	el+="<rect x='"+(-badge.size/2)+"' y='"+(-badge.size/2)+"' width='"+(badge.size/2)+"' height='"+badge.size+"' fill='black'/>";
 	el+="</mask>";	
-	el+="<rect id='division' x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black' mask='url(#divisionMask)' clip-path='url(#badgeClip)'/>";
+	el+="<rect id='division' x='"+(-badge.size/2)+"' y='"+(-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black' mask='url(#divisionMask)' clip-path='url(#badgeClip)'/>";
 	id('badgeSVG').innerHTML+=el;
 	division.type='vertical';
 	division.col='black';
@@ -378,10 +384,10 @@ id('VdivButton').addEventListener('click', function() {
 id('HdivButton').addEventListener('click', function() {
 	report("horizontal division");
 	var el="<mask id='divisionMask'>";
-	el+="<rect x='"+(mid-badge.size/2)+"' y='"+mid+"' width='"+badge.size+"' height='"+(badge.size/2)+"' fill='white'/>";
-	el+="<rect x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/2)+"' width='"+badge.size+"' height='"+(badge.size/2)+"' fill='black'/>";
+	el+="<rect x='"+(-badge.size/2)+"' y='0' width='"+badge.size+"' height='"+badge.size+"' fill='white'/>";
+	el+="<rect x='"+(-badge.size/2)+"' y='"+(-badge.size/2)+"' width='"+badge.size+"' height='"+(badge.size/2)+"' fill='black'/>";
 	el+="</mask>";
-	el+="<rect id='division' x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black' mask='url(#divisionMask)' clip-path='url(#badgeClip)'/>";
+	el+="<rect id='division' x='"+(-badge.size/2)+"' y='"+(-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black' mask='url(#divisionMask)' clip-path='url(#badgeClip)'/>";
 	id('badgeSVG').innerHTML+=el;
 	division.type='horizontal';
 	division.col='black';
@@ -392,10 +398,10 @@ id('HdivButton').addEventListener('click', function() {
 id('SEdivButton').addEventListener('click', function() {
 	report("SE diagonal division");
 	var el="<mask id='divisionMask'>";
-	el+="<rect x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black'/>";
-	el+="<path d='M"+(mid-badge.size/2)+" "+(mid+badge.size/2)+" L"+(mid+badge.size/2)+" "+(mid-badge.size/2)+" L"+(mid+badge.size/2)+" "+(mid+badge.size/2)+" Z' fill='white'/>";
+	el+="<rect x='"+(-badge.size/2)+"' y='"+(-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black'/>";
+	el+="<path d='M"+(-badge.size/2)+" "+(badge.size/2)+" L"+(badge.size/2)+" "+(-badge.size/2)+" L"+(badge.size/2)+" "+(badge.size/2)+" Z' fill='white'/>";
 	el+="</mask>";
-	el+="<rect id='division' x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black' mask='url(#divisionMask)' clip-path='url(#badgeClip)'/>";
+	el+="<rect id='division' x='"+(-badge.size/2)+"' y='"+(-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black' mask='url(#divisionMask)' clip-path='url(#badgeClip)'/>";
 	id('badgeSVG').innerHTML+=el;
 	division.type='diagonalSE';
 	division.col='black';
@@ -406,10 +412,10 @@ id('SEdivButton').addEventListener('click', function() {
 id('SWdivButton').addEventListener('click', function() {
 	report("SW diagonal division");
 	var el="<mask id='divisionMask'>";
-	el+="<rect x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black'/>";
-	el+="<path d='M"+(mid-badge.size/2)+" "+(mid-badge.size/2)+" L"+(mid+badge.size/2)+" "+(mid+badge.size/2)+" L"+(mid-badge.size/2)+" "+(mid+badge.size/2)+" Z' fill='white'/>";
+	el+="<rect x='"+(-badge.size/2)+"' y='"+(-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black'/>";
+	el+="<path d='M"+(-badge.size/2)+" "+(-badge.size/2)+" L"+(badge.size/2)+" "+(badge.size/2)+" L"+(-badge.size/2)+" "+(badge.size/2)+" Z' fill='white'/>";
 	el+="</mask>";
-	el+="<rect id='division' x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black' mask='url(#divisionMask)' clip-path='url(#badgeClip)'/>";
+	el+="<rect id='division' x='"+(-badge.size/2)+"' y='"+(-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black' mask='url(#divisionMask)' clip-path='url(#badgeClip)'/>";
 	id('badgeSVG').innerHTML+=el;
 	division.type='diagonalSE';
 	division.col='black';
@@ -420,11 +426,11 @@ id('SWdivButton').addEventListener('click', function() {
 id('quartersButton').addEventListener('click', function() {
 	report("quarters division");
 	var el="<mask id='divisionMask'>";
-	el+="<rect x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black'/>";
-	el+="<rect x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/2)+"' width='"+(badge.size/2)+"' height='"+(badge.size/2)+"' fill='white'/>";
-	el+="<rect x='"+mid+"' y='"+mid+"' width='"+(badge.size/2)+"' height='"+(badge.size/2)+"' fill='white'/>";
+	el+="<rect x='"+(-badge.size/2)+"' y='"+(-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black'/>";
+	el+="<rect x='"+(-badge.size/2)+"' y='"+(-badge.size/2)+"' width='"+(badge.size/2)+"' height='"+(badge.size/2)+"' fill='white'/>";
+	el+="<rect x='0' y='0' width='"+(badge.size/2)+"' height='"+(badge.size/2)+"' fill='white'/>";
 	el+="</mask>";
-	el+="<rect id='division' x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black' mask='url(#divisionMask)' clip-path='url(#badgeClip)'/>";
+	el+="<rect id='division' x='"+(-badge.size/2)+"' y='"+(-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black' mask='url(#divisionMask)' clip-path='url(#badgeClip)'/>";
 	id('badgeSVG').innerHTML+=el;
 	division.type='quarters';
 	division.col='black';
@@ -435,10 +441,10 @@ id('quartersButton').addEventListener('click', function() {
 id('diagonalQuartersButton').addEventListener('click', function() {
 	report("diagonal quarters division");
 	var el="<mask id='divisionMask'>";
-	el+="<rect x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black'/>";
-	el+="<path d='M"+mid+" "+mid+" L"+(mid+badge.size/2)+" "+(mid+badge.size/2)+" L"+(mid-badge.size/2)+" "+(mid+badge.size/2)+"L"+mid+" "+mid+" L"+(mid-badge.size/2)+" "+(mid-badge.size/2)+" L "+(mid+badge.size/2)+" "+(mid-badge.size/2)+" Z' fill='white'/>";
+	el+="<rect x='"+(-badge.size/2)+"' y='"+(-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black'/>";
+	el+="<path d='M0 0 L"+(badge.size/2)+" "+(badge.size/2)+" L"+(-badge.size/2)+" "+(badge.size/2)+"L0 0 L"+(-badge.size/2)+" "+(-badge.size/2)+" L "+(badge.size/2)+" "+(-badge.size/2)+" Z' fill='white'/>";
 	el+="</mask>";
-	el+="<rect id='division' x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black' mask='url(#divisionMask)' clip-path='url(#badgeClip)'/>";
+	el+="<rect id='division' x='"+(-badge.size/2)+"' y='"+(-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black' mask='url(#divisionMask)' clip-path='url(#badgeClip)'/>";
 	id('badgeSVG').innerHTML+=el;
 	division.type='diagonalQuarters';
 	division.col='black';
@@ -449,10 +455,10 @@ id('diagonalQuartersButton').addEventListener('click', function() {
 id('cantonButton').addEventListener('click', function() {
 	report("cannton division");
 	var el="<mask id='divisionMask'>";
-	el+="<rect x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black'/>";
-	el+="<rect x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/2)+"' width='"+(badge.size/2)+"' height='"+(badge.size/2)+"' fill='white'/>";
+	el+="<rect x='"+(-badge.size/2)+"' y='"+(-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black'/>";
+	el+="<rect x='"+(-badge.size/2)+"' y='"+(-badge.size/2)+"' width='"+(badge.size/2)+"' height='"+(badge.size/2)+"' fill='white'/>";
 	el+="</mask>";
-	el+="<rect id='division' x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black' mask='url(#divisionMask)' clip-path='url(#badgeClip)'/>";
+	el+="<rect id='division' x='"+(-badge.size/2)+"' y='"+(-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black' mask='url(#divisionMask)' clip-path='url(#badgeClip)'/>";
 	id('badgeSVG').innerHTML+=el;
 	division.type='canton';
 	division.col='black';
@@ -468,10 +474,10 @@ id('noBandButton').addEventListener('click', function() {
 id('chiefButton').addEventListener('click', function() {
 	report("chief");
 	var el="<mask id='bandMask'>";
-	el+="<rect x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/2)+"' width='"+badge.size+"' height='"+(badge.size/5)+"' fill='white'/>";
-	el+="<rect x='"+(mid-badge.size/2)+"' y='"+(mid-0.3*badge.size)+"' width='"+badge.size/2+"' height='"+(0.8*badge.size)+"' fill='black'/>";
+	el+="<rect x='"+(-badge.size/2)+"' y='"+(-badge.size/2)+"' width='"+badge.size+"' height='"+(badge.size/5)+"' fill='white'/>";
+	el+="<rect x='"+(-badge.size/2)+"' y='"+(-0.3*badge.size)+"' width='"+badge.size/2+"' height='"+(0.8*badge.size)+"' fill='black'/>";
 	el+="</mask>";
-	el+="<rect id='band' x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black' mask='url(#bandMask)' clip-path='url(#badgeClip)'/>";
+	el+="<rect id='band' x='"+(-badge.size/2)+"' y='"+(-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black' mask='url(#bandMask)' clip-path='url(#badgeClip)'/>";
 	id('badgeSVG').innerHTML+=el;
 	band.type='chief';
 	band.col='black';
@@ -482,11 +488,10 @@ id('chiefButton').addEventListener('click', function() {
 id('paleButton').addEventListener('click', function() {
 	report("pale");
 	var el="<mask id='bandMask'>";
-	el+="<rect x='"+(mid-badge.size/10)+"' y='"+(mid-badge.size/2)+"' width='"+(badge.size/5)+"' height='"+(badge.size)+"' fill='white'/>";
-	el+="<rect x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/2)+"' width='"+(0.4*badge.size)+"' height='"+(badge.size)+"' fill='black'/>";
-	el+="<rect x='"+(mid-badge.size*0.6)+"' y='"+(mid-badge.size/2)+"' width='"+(0.4*badge.size)+"' height='"+(badge.size)+"' fill='black'/>";
+	el+="<rect x='"+(-badge.size/2)+"' y='"+(-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black'/>";
+	el+="<rect x='"+(-badge.size/10)+"' y='"+(-badge.size/2)+"' width='"+(badge.size/5)+"' height='"+(badge.size)+"' fill='white'/>";
 	el+="</mask>";
-	el+="<rect id='band' x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black' mask='url(#bandMask)' clip-path='url(#badgeClip)'/>";
+	el+="<rect id='band' x='"+(-badge.size/2)+"' y='"+(-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black' mask='url(#bandMask)' clip-path='url(#badgeClip)'/>";
 	id('badgeSVG').innerHTML+=el;
 	band.type='pale';
 	band.col='black';
@@ -497,11 +502,10 @@ id('paleButton').addEventListener('click', function() {
 id('fessButton').addEventListener('click', function() {
 	report("fell");
 	var el="<mask id='bandMask'>";
-	el+="<rect x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/10)+"' width='"+badge.size+"' height='"+(badge.size/5)+"' fill='white'/>";
-	el+="<rect x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/2)+"' width='"+badge.size+"' height='"+(0.4*badge.size)+"' fill='black'/>";
-	el+="<rect x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size*0.6)+"' width='"+badge.size+"' height='"+(0.4*badge.size)+"' fill='black'/>";
+	el+="<rect x='"+(-badge.size/2)+"' y='"+(-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black'/>";
+	el+="<rect x='"+(-badge.size/2)+"' y='"+(-badge.size/10)+"' width='"+badge.size+"' height='"+(badge.size/5)+"' fill='white'/>";
 	el+="</mask>";
-	el+="<rect id='band' x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black' mask='url(#bandMask)' clip-path='url(#badgeClip)'/>";
+	el+="<rect id='band' x='"+(-badge.size/2)+"' y='"+(-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black' mask='url(#bandMask)' clip-path='url(#badgeClip)'/>";
 	id('badgeSVG').innerHTML+=el;
 	band.type='fell';
 	band.col='black';
@@ -512,10 +516,10 @@ id('fessButton').addEventListener('click', function() {
 id('RbendButton').addEventListener('click', function() {
 	report("right bend");
 	var el="<mask id='bandMask'>";
-	el+="<rect x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black'/>";
-	el+="<path d='M"+(mid-badge.size/2)+" "+(mid+0.37*badge.size)+" L"+(mid+0.37*badge.size)+" "+(mid-badge.size/2)+" L"+(mid+badge.size/2)+" "+(mid-badge.size/2)+" L"+(mid+badge.size/2)+" "+(mid-0.37*badge.size)+" L"+(mid-0.37*badge.size)+" "+(mid+badge.size/2)+" L"+(mid-badge.size/2)+" "+(mid+badge.size/2)+" Z' fill='white'/>";
+	el+="<rect x='"+(-badge.size/2)+"' y='"+(-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black'/>";
+	el+="<path d='M"+(-badge.size/2)+" "+(0.37*badge.size)+" L"+(0.37*badge.size)+" "+(-badge.size/2)+" L"+(badge.size/2)+" "+(-badge.size/2)+" L"+(badge.size/2)+" "+(-0.37*badge.size)+" L"+(-0.37*badge.size)+" "+(badge.size/2)+" L"+(-badge.size/2)+" "+(badge.size/2)+" Z' fill='white'/>";
 	el+="</mask>";
-	el+="<rect id='band' x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black' mask='url(#bandMask)' clip-path='url(#badgeClip)'/>";
+	el+="<rect id='band' x='"+(-badge.size/2)+"' y='"+(-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black' mask='url(#bandMask)' clip-path='url(#badgeClip)'/>";
 	id('badgeSVG').innerHTML+=el;
 	band.type='bendR';
 	band.col='black';
@@ -526,10 +530,10 @@ id('RbendButton').addEventListener('click', function() {
 id('LbendButton').addEventListener('click', function() {
 	report("left bend");
 	var el="<mask id='bandMask'>";
-	el+="<rect x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black'/>";
-	el+="<path d='M"+(mid-badge.size/2)+" "+(mid-badge.size/2)+" L"+(mid-0.37*badge.size)+" "+(mid-badge.size/2)+" L"+(mid+badge.size/2)+" "+(mid+0.37*badge.size)+" L"+(mid+badge.size/2)+" "+(mid+badge.size/2)+  " L"+(mid+0.37*badge.size)+" "+(mid+badge.size/2)+" L"+(mid-badge.size/2)+" "+(mid-0.37*badge.size)+" Z' fill='white'/>";
+	el+="<rect x='"+(-badge.size/2)+"' y='"+(-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black'/>";
+	el+="<path d='M"+(-badge.size/2)+" "+(-badge.size/2)+" L"+(-0.37*badge.size)+" "+(-badge.size/2)+" L"+(badge.size/2)+" "+(0.37*badge.size)+" L"+(badge.size/2)+" "+(badge.size/2)+  " L"+(0.37*badge.size)+" "+(badge.size/2)+" L"+(-badge.size/2)+" "+(-0.37*badge.size)+" Z' fill='white'/>";
 	el+="</mask>";
-	el+="<rect id='band' x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black' mask='url(#bandMask)' clip-path='url(#badgeClip)'/>";
+	el+="<rect id='band' x='"+(-badge.size/2)+"' y='"+(-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black' mask='url(#bandMask)' clip-path='url(#badgeClip)'/>";
 	id('badgeSVG').innerHTML+=el;
 	band.type='bendL';
 	band.col='black';
@@ -540,11 +544,11 @@ id('LbendButton').addEventListener('click', function() {
 id('crossedButton').addEventListener('click', function() {
 	report("crossed bands");
 	var el="<mask id='bandMask'>";
-	el+="<rect x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black'/>";
-	el+="<rect x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/10)+"' width='"+badge.size+"' height='"+(badge.size/5)+"' fill='white'/>";
-	el+="<rect x='"+(mid-badge.size/10)+"' y='"+(mid-badge.size/2)+"' width='"+(badge.size/5)+"' height='"+badge.size+"' fill='white'/>";
+	el+="<rect x='"+(-badge.size/2)+"' y='"+(-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black'/>";
+	el+="<rect x='"+(-badge.size/2)+"' y='"+(-badge.size/10)+"' width='"+badge.size+"' height='"+(badge.size/5)+"' fill='white'/>";
+	el+="<rect x='"+(-badge.size/10)+"' y='"+(-badge.size/2)+"' width='"+(badge.size/5)+"' height='"+badge.size+"' fill='white'/>";
 	el+="</mask>";
-	el+="<rect id='band' x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black' mask='url(#bandMask)' clip-path='url(#badgeClip)'/>";
+	el+="<rect id='band' x='"+(-badge.size/2)+"' y='"+(-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black' mask='url(#bandMask)' clip-path='url(#badgeClip)'/>";
 	id('badgeSVG').innerHTML+=el;
 	band.type='crossed';
 	band.col='black';
@@ -555,11 +559,11 @@ id('crossedButton').addEventListener('click', function() {
 id('saltireButton').addEventListener('click', function() {
 	report("saltire");
 	var el="<mask id='bandMask'>";
-	el+="<rect x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black'/>";
-	el+="<path d='M"+(mid-badge.size/2)+" "+(mid-badge.size/2)+" L"+(mid-0.37*badge.size)+" "+(mid-badge.size/2)+" L"+(mid+badge.size/2)+" "+(mid+0.37*badge.size)+" L"+(mid+badge.size/2)+" "+(mid+badge.size/2)+  " L"+(mid+0.37*badge.size)+" "+(mid+badge.size/2)+" L"+(mid-badge.size/2)+" "+(mid-0.37*badge.size)+" Z' fill='white'/>";
-	el+="<path d='M"+(mid-badge.size/2)+" "+(mid+0.37*badge.size)+" L"+(mid+0.37*badge.size)+" "+(mid-badge.size/2)+" L"+(mid+badge.size/2)+" "+(mid-badge.size/2)+" L"+(mid+badge.size/2)+" "+(mid-0.37*badge.size)+" L"+(mid-0.37*badge.size)+" "+(mid+badge.size/2)+" L"+(mid-badge.size/2)+" "+(mid+badge.size/2)+" Z' fill='white'/>";
+	el+="<rect x='"+(-badge.size/2)+"' y='"+(-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black'/>";
+	el+="<path d='M"+(-badge.size/2)+" "+(-badge.size/2)+" L"+(-0.37*badge.size)+" "+(-badge.size/2)+" L"+(badge.size/2)+" "+(0.37*badge.size)+" L"+(badge.size/2)+" "+(badge.size/2)+  " L"+(0.37*badge.size)+" "+(badge.size/2)+" L"+(-badge.size/2)+" "+(-0.37*badge.size)+" Z' fill='white'/>";
+	el+="<path d='M"+(-badge.size/2)+" "+(0.37*badge.size)+" L"+(0.37*badge.size)+" "+(-badge.size/2)+" L"+(badge.size/2)+" "+(-badge.size/2)+" L"+(badge.size/2)+" "+(-0.37*badge.size)+" L"+(-0.37*badge.size)+" "+(badge.size/2)+" L"+(-badge.size/2)+" "+(badge.size/2)+" Z' fill='white'/>";
 	el+="</mask>";
-	el+="<rect id='band' x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black' mask='url(#bandMask)' clip-path='url(#badgeClip)'/>";
+	el+="<rect id='band' x='"+(-badge.size/2)+"' y='"+(-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black' mask='url(#bandMask)' clip-path='url(#badgeClip)'/>";
 	id('badgeSVG').innerHTML+=el;
 	band.type='bendL';
 	band.col='black';
@@ -570,10 +574,10 @@ id('saltireButton').addEventListener('click', function() {
 id('chevronUpButton').addEventListener('click', function() {
 	report("chevron up");
 	var el="<mask id='bandMask'>";
-	el+="<rect x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black'/>";
-	el+="<path d='M"+(mid-badge.size/2)+" "+(mid+0.11*badge.size)+" L"+mid+" "+(mid-0.39*badge.size)+" L"+(mid+badge.size/2)+" "+(mid+0.11*badge.size)+" L"+(mid+badge.size/2)+" "+(mid+0.39*badge.size)+  " L"+mid+" "+(mid-0.11*badge.size)+" L"+(mid-badge.size/2)+" "+(mid+0.39*badge.size)+" Z' fill='white'/>";
+	el+="<rect x='"+(-badge.size/2)+"' y='"+(-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black'/>";
+	el+="<path d='M"+(-badge.size/2)+" "+(0.11*badge.size)+" L0 "+(-0.39*badge.size)+" L"+(badge.size/2)+" "+(0.11*badge.size)+" L"+(badge.size/2)+" "+(0.39*badge.size)+" L0 "+(-0.11*badge.size)+" L"+(-badge.size/2)+" "+(0.39*badge.size)+" Z' fill='white'/>";
 	el+="</mask>";
-	el+="<rect id='band' x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black' mask='url(#bandMask)' clip-path='url(#badgeClip)'/>";
+	el+="<rect id='band' x='"+(-badge.size/2)+"' y='"+(-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black' mask='url(#bandMask)' clip-path='url(#badgeClip)'/>";
 	id('badgeSVG').innerHTML+=el;
 	band.type='chevronUp';
 	band.col='black';
@@ -584,10 +588,10 @@ id('chevronUpButton').addEventListener('click', function() {
 id('chevronDownButton').addEventListener('click', function() {
 	report("chevron down");
 	var el="<mask id='bandMask'>";
-	el+="<rect x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black'/>";
-	el+="<path d='M"+(mid-badge.size/2)+" "+(mid-0.11*badge.size)+" L"+mid+" "+(mid+0.39*badge.size)+" L"+(mid+badge.size/2)+" "+(mid-0.11*badge.size)+" L"+(mid+badge.size/2)+" "+(mid-0.39*badge.size)+  " L"+mid+" "+(mid+0.11*badge.size)+" L"+(mid-badge.size/2)+" "+(mid-0.39*badge.size)+" Z' fill='white'/>";
+	el+="<rect x='"+(-badge.size/2)+"' y='"+(-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black'/>";
+	el+="<path d='M"+(-badge.size/2)+" "+(-0.11*badge.size)+" L0 "+(0.39*badge.size)+" L"+(badge.size/2)+" "+(-0.11*badge.size)+" L"+(badge.size/2)+" "+(-0.39*badge.size)+  " L0 "+(0.11*badge.size)+" L"+(-badge.size/2)+" "+(-0.39*badge.size)+" Z' fill='white'/>";
 	el+="</mask>";
-	el+="<rect id='band' x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black' mask='url(#bandMask)' clip-path='url(#badgeClip)'/>";
+	el+="<rect id='band' x='"+(-badge.size/2)+"' y='"+(-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black' mask='url(#bandMask)' clip-path='url(#badgeClip)'/>";
 	id('badgeSVG').innerHTML+=el;
 	band.type='chevronUp';
 	band.col='black';
@@ -602,7 +606,7 @@ id('noSymbolButton').addEventListener('click', function() {
 
 id('ballButton').addEventListener('click', function() {
 	report("ball");
-	var el="<circle id='symbol' cx='"+mid+"' cy='"+mid+"' r='"+(badge.size*0.2)+"' fill='black'/>";
+	var el="<circle id='symbol' cx='0' cy='0' r='"+(badge.size*0.2)+"' fill='black'/>";
 	id('badgeSVG').innerHTML+=el;
 	element="symbol";
 	show("colour");
@@ -611,11 +615,11 @@ id('ballButton').addEventListener('click', function() {
 id('ringButton').addEventListener('click', function() {
 	report("ring");
 	var el="<mask id='symbolMask'>";
-	el+="<rect x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black'/>";
-	el+="<circle cx='"+mid+"' cy='"+mid+"' r='"+(badge.size*0.2)+"' fill='white'/>";
-	el+="<circle cx='"+mid+"' cy='"+mid+"' r='"+(badge.size*0.1)+"' fill='black'/>";
+	el+="<rect x='"+(-badge.size/2)+"' y='"+(-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black'/>";
+	el+="<circle cx='0' cy='0' r='"+(badge.size*0.2)+"' fill='white'/>";
+	el+="<circle cx='0' cy='0' r='"+(badge.size*0.1)+"' fill='black'/>";
 	el+="</mask>";
-	el+="<rect id='symbol' x='"+(mid-badge.size/2)+"' y='"+(mid-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black' mask='url(#symbolMask)' clip-path='url(#badgeClip)'/>";
+	el+="<rect id='symbol' x='"+(-badge.size/2)+"' y='"+(-badge.size/2)+"' width='"+badge.size+"' height='"+badge.size+"' fill='black' mask='url(#symbolMask)' clip-path='url(#badgeClip)'/>";
 	id('badgeSVG').innerHTML+=el;
 	element="symbol";
 	show("colour");
@@ -623,7 +627,7 @@ id('ringButton').addEventListener('click', function() {
 
 id('boxButton').addEventListener('click', function() {
 	report("box");
-	var el="<rect id='symbol' x='"+(mid-badge.size/5)+"' y='"+(mid-badge.size/5)+"' width='"+(badge.size*0.5)+"' height='"+(badge.size*0.5)+"' fill='black'/>";
+	var el="<rect id='symbol' x='"+(-badge.size/5)+"' y='"+(-badge.size/5)+"' width='"+(badge.size*0.4)+"' height='"+(badge.size*0.4)+"' fill='black'/>";
 	id('badgeSVG').innerHTML+=el;
 	element="symbol";
 	show("colour");
@@ -631,7 +635,7 @@ id('boxButton').addEventListener('click', function() {
 
 id('dmndButton').addEventListener('click', function() {
 	report("diamond");
-	var el="<path id='symbol' d='M "+(mid-badge.size/5)+" "+mid+" L"+mid+" "+(mid-badge.size/5)+" L"+(mid+badge.size/5)+" "+mid+" L"+mid+" "+(mid+badge.size/5)+" Z' fill='black'/>";
+	var el="<path id='symbol' d='M "+(-badge.size/5)+" 0 L0 "+(-badge.size/5)+" L"+(badge.size/5)+" 0 L0 "+(badge.size/5)+" Z' fill='black'/>";
 	id('badgeSVG').innerHTML+=el;
 	element="symbol";
 	show("colour");
@@ -640,7 +644,7 @@ id('dmndButton').addEventListener('click', function() {
 id('crossButton').addEventListener('click', function() {
 	report("cross");
 	var d=badge.size/5;
-	var el='<path id="symbol" d="M'+mid+' '+mid+'m+'+d/2+' '+d/2+' l'+d+' '+0+' l '+0+' '+(-d)+' l'+(-d)+' '+0+' l'+0+' '+(-d)+' l'+(-d)+' '+0+' l'+0+' '+d+' l'+(-d)+' '+0+' l'+0+' '+d+' l'+d+' '+0+' l'+0+' '+d+' l'+d+' '+0+' Z" fill="black"/>';
+	var el="<path id='symbol' d='M"+(d/2)+" "+(d/2)+" l"+d+" 0 l 0 "+(-d)+" l"+(-d)+" 0 l0"+(-d)+" l"+(-d)+" 0 l 0 "+d+" l "+(-d)+" 0 l0 "+d+" l"+d+" 0 l0 "+d+" l"+d+" 0 Z' fill='black'/>";
 	id('badgeSVG').innerHTML+=el;
 	element="symbol";
 	show("colour");
@@ -649,7 +653,7 @@ id('crossButton').addEventListener('click', function() {
 id('starButton').addEventListener('click', function() {
 	report("star");
 	var r=badge.size/3;
-	var el='<path id="symbol" d="M'+mid+' '+(mid-r)+'L+'+(mid+0.588*r)+' '+(mid+0.809*r)+' L'+(mid-0.951*r)+' '+(mid-0.309*r)+' L'+(mid+0.951*r)+' '+(mid-0.309*r)+' L'+(mid-0.558*r)+' '+(mid+0.809*r)+' Z" fill="black"/>';
+	var el="<path id='symbol' d='M0 "+(-r)+" L"+(0.588*r)+" "+(0.809*r)+" L"+(-0.951*r)+" "+(-0.309*r)+" L"+(0.951*r)+" "+(-0.309*r)+" L"+(-0.558*r)+" "+(0.809*r)+" Z' fill='black'/>";
 	id('badgeSVG').innerHTML+=el;
 	element="symbol";
 	show("colour");
