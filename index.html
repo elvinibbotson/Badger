@@ -93,8 +93,14 @@
 			<button id='starButton' class='menuButton'></button>
 		</div>
 	</div>
+	<div id='saveDialog' class='dialog'>
+		save as...<br/>
+		<input id='saveName' type='text'>.svg<br/>
+		<button id='saveButton'>SAVE</button>
+		<button onclick='history.go(0);'>RELOAD</button>
+	</div>
 	<div id='graphic'>
-		<svg id='badgeSVG' viewBox='-250 -250 500 500'>
+		<svg id='badgeSVG' xmlns='http://www.w3.org/2000/svg' viewBox='-250 -250 500 500'>
 		</svg>
 	</div>
 	<script src="badgerScript.js" async></script>

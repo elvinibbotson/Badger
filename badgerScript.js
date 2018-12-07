@@ -55,8 +55,8 @@ id('badgeSVG').style.height=badge.size+'px';
 // report("size: "+badge.size+"; mid: "+mid);
 // id('badgeSVG').style.top='5px';
 
-// offset graphcs origin to centre
-document.getElementById('badgeSVG').setAttribute('viewBox',(-1*badge.size/2)+' '+(-1*badge.size/2)+' '+badge.size+' '+badge.size);
+// offset graphics origin to centre
+document.getElementById('badgeSVG').setAttribute('viewBox',(-badge.size/2)+' '+(-badge.size/2)+' '+badge.size+' '+badge.size);
 
 badge.size-=20;
 report("size: "+badge.size);
@@ -601,7 +601,7 @@ id('chevronDownButton').addEventListener('click', function() {
 
 id('noSymbolButton').addEventListener('click', function() {
 	report("no symbol");
-	show('************ SAVE FILE DIALOG ?????????????');
+	show('save');
 });
 
 id('ballButton').addEventListener('click', function() {
@@ -661,6 +661,8 @@ id('starButton').addEventListener('click', function() {
 
 // add other symbols
 
+id('saveButton').addEventListener('click',saveSVG);
+
 function setColour(col) {
 	report("set  colour of "+element+" to "+col+" - pattern is "+pattern);
 	switch(element) {
@@ -713,6 +715,7 @@ function setColour(col) {
 			break;
 		case 'symbol':
 			id('symbol').setAttribute('fill',col);
+			show('save');
 			break;
 	}
 };
@@ -814,6 +817,25 @@ function setPattern(type) {
 	id(element).setAttribute('fill',url);
 	pattern=true;
 	show('colour');
+}
+
+function saveSVG() {
+	var svg=id('graphic').innerHTML;
+	console.log("SVG: "+svg);
+	var fileName="badge.svg";
+	var saveName=id('saveName').value;
+	if(saveName) fileName=saveName+".svg";
+	console.log("save as "+fileName);
+	// var json=JSON.stringify(data);
+	var blob=new Blob([svg], {type:"data:image/svg+xml"});
+	var a =document.createElement('a');
+	a.style.display='none';
+	var url = window.URL.createObjectURL(blob);
+	a.href= url;
+	a.download=fileName;
+	document.body.appendChild(a);
+	a.click();
+	alert(fileName+" saved to downloads folder");
 }
 
 function show(name) {
