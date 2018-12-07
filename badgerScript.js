@@ -245,7 +245,7 @@ id('outlineButton').addEventListener('click', function() {
 			break;
 		case 'circle':
 			report("circle outline");
-			el="<circle id='outline' cx='0 cy='0 r='"+badge.size/2+"' fill='none' stroke='"+border.col+"' stroke-width='5'/>";
+			el="<circle id='outline' cx='0' cy='0' r='"+badge.size/2+"' fill='none' stroke='"+border.col+"' stroke-width='5'/>";
 			badge.size*=border.size;
 			id('badge').setAttribute('r',badge.size/2);
 			id('badgeClipCircle').setAttribute('r',badge.size/2);
