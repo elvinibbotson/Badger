@@ -601,6 +601,7 @@ id('chevronDownButton').addEventListener('click', function() {
 
 id('noSymbolButton').addEventListener('click', function() {
 	report("no symbol");
+	element='badge';
 	show('save');
 });
 
@@ -715,6 +716,7 @@ function setColour(col) {
 			break;
 		case 'symbol':
 			id('symbol').setAttribute('fill',col);
+			element='badge';
 			show('save');
 			break;
 	}
