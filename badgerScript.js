@@ -33,8 +33,9 @@ if(sw>sh) { // horizontal layout
 }
 else { // vertical layout
 	// place graphics above dialogs
-	badge.size=sh-300;
-	if(sw<badge.size) badge.size=sw;
+	// badge.size=sh-300;
+	// if(sw<badge.size) 
+	badge.size=sw;
 	// var t=badge.size;
 	report("badge size: "+badge.size);
 	id("header").style.top=badge.size+"px";
